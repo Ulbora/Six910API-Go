@@ -22,8 +22,12 @@ package six910api
 */
 
 import (
+	"bytes"
+	"net/http"
+
 	px "github.com/Ulbora/GoProxy"
 	lg "github.com/Ulbora/Level_Logger"
+	sdbi "github.com/Ulbora/six910-database-interface"
 )
 
 //Six910API Six910API
@@ -47,6 +51,46 @@ func (a *Six910API) GetNew() API {
 	a.proxy = &p
 
 	return a
+}
+
+func (a *Six910API) buildRequest(method string, url string, headers *Headers, aJSON []byte) *http.Request {
+	headers.Set("storeName", a.storeName)
+	headers.Set("localDomain", a.localDomain)
+	if a.apiKey != "" {
+		headers.Set("apiKey", a.apiKey)
+	}
+	var req *http.Request
+	var err error
+	if method == post || method == put {
+		headers.Set("Content-Type", "application/json")
+		req, err = http.NewRequest(method, url, bytes.NewBuffer(aJSON))
+	} else {
+		req, err = http.NewRequest(method, url, nil)
+	}
+	a.log.Debug("err in build req: ", err)
+	if err == nil {
+		for k, v := range headers.headers {
+			a.log.Debug("header: ", k, v)
+			req.Header.Set(k, v)
+		}
+	}
+	return req
+}
+
+func (a *Six910API) getStoreID(headers *Headers) int64 {
+	if a.storeID == 0 {
+		var url = a.restURL + "/rs/store/get/" + a.storeName + "/" + a.localDomain
+		var str sdbi.Store
+		req := a.buildRequest(get, url, headers, nil)
+		suc, stat := a.proxy.Do(req, &str)
+		a.log.Debug("suc: ", suc)
+		a.log.Debug("stat: ", stat)
+		if suc {
+			a.storeID = str.ID
+		}
+	}
+	a.log.Debug("storeId: ", a.storeID)
+	return a.storeID
 }
 
 //SetLogLever SetLogLever

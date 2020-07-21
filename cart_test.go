@@ -12,7 +12,7 @@ import (
 	sdbi "github.com/Ulbora/six910-database-interface"
 )
 
-func TestSix910API_AddAddress(t *testing.T) {
+func TestSix910API_AddCart(t *testing.T) {
 	var sapi Six910API
 	//sapi.SetAPIKey("123")
 	sapi.storeID = 59
@@ -34,26 +34,22 @@ func TestSix910API_AddAddress(t *testing.T) {
 	sapi.OverrideProxy(&gp)
 	//---end mock out the call
 
-	var add sdbi.Address
-	add.Address = "test"
-	add.City = "test"
-	add.Country = "USA"
-	add.State = "GA"
-	add.Type = "Billing"
-	add.CustomerID = 17
-	add.Zip = "12345"
+	var crt sdbi.Cart
+	crt.CustomerID = 17
+	crt.IPAddress = "123456"
+	crt.UserInfo = "test cart"
 	var head Headers
 	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
 	//head.Set("localDomain", "defaultLocalStore.mydomain.com")
 
-	res := api.AddAddress(&add, &head)
+	res := api.AddCart(&crt, &head)
 
 	if !res.Success {
 		t.Fail()
 	}
 }
 
-func TestSix910API_AddAddressFail(t *testing.T) {
+func TestSix910API_AddCartfail(t *testing.T) {
 	var sapi Six910API
 	//sapi.SetAPIKey("123")
 	sapi.storeID = 59
@@ -71,30 +67,26 @@ func TestSix910API_AddAddressFail(t *testing.T) {
 	mres.Body = ioutil.NopCloser(bytes.NewBufferString(`{"success":true, "id":1}`))
 	gp.MockResp = &mres
 	//gp.MockDoSuccess1 = true
-	gp.MockRespCode = 400
+	gp.MockRespCode = 200
 	sapi.OverrideProxy(&gp)
 	//---end mock out the call
 
-	var add sdbi.Address
-	add.Address = "test"
-	add.City = "test"
-	add.Country = "USA"
-	add.State = "GA"
-	add.Type = "Billing"
-	add.CustomerID = 17
-	add.Zip = "12345"
+	var crt sdbi.Cart
+	crt.CustomerID = 17
+	crt.IPAddress = "123456"
+	crt.UserInfo = "test cart"
 	var head Headers
 	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
 	//head.Set("localDomain", "defaultLocalStore.mydomain.com")
 
-	res := api.AddAddress(&add, &head)
+	res := api.AddCart(&crt, &head)
 
-	if !res.Success || res.Code != 400 {
+	if !res.Success {
 		t.Fail()
 	}
 }
 
-func TestSix910API_UpdateAddress(t *testing.T) {
+func TestSix910API_UpdateCart(t *testing.T) {
 	var sapi Six910API
 	//sapi.SetAPIKey("123")
 	sapi.storeID = 59
@@ -116,26 +108,22 @@ func TestSix910API_UpdateAddress(t *testing.T) {
 	sapi.OverrideProxy(&gp)
 	//---end mock out the call
 
-	var add sdbi.Address
-	add.Address = "test"
-	add.City = "test"
-	add.Country = "USA"
-	add.State = "GA"
-	add.Type = "Billing"
-	add.CustomerID = 17
-	add.Zip = "12345"
+	var crt sdbi.Cart
+	crt.CustomerID = 17
+	crt.IPAddress = "123456"
+	crt.UserInfo = "test cart"
 	var head Headers
 	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
 	//head.Set("localDomain", "defaultLocalStore.mydomain.com")
 
-	res := api.UpdateAddress(&add, &head)
+	res := api.UpdateCart(&crt, &head)
 
 	if !res.Success {
 		t.Fail()
 	}
 }
 
-func TestSix910API_UpdateAddressFail(t *testing.T) {
+func TestSix910API_UpdateCartFail(t *testing.T) {
 	var sapi Six910API
 	//sapi.SetAPIKey("123")
 	sapi.storeID = 59
@@ -157,26 +145,22 @@ func TestSix910API_UpdateAddressFail(t *testing.T) {
 	sapi.OverrideProxy(&gp)
 	//---end mock out the call
 
-	var add sdbi.Address
-	add.Address = "test"
-	add.City = "test"
-	add.Country = "USA"
-	add.State = "GA"
-	add.Type = "Billing"
-	add.CustomerID = 17
-	add.Zip = "12345"
+	var crt sdbi.Cart
+	crt.CustomerID = 17
+	crt.IPAddress = "123456"
+	crt.UserInfo = "test cart"
 	var head Headers
 	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
 	//head.Set("localDomain", "defaultLocalStore.mydomain.com")
 
-	res := api.UpdateAddress(&add, &head)
+	res := api.UpdateCart(&crt, &head)
 
 	if !res.Success {
 		t.Fail()
 	}
 }
 
-func TestSix910API_GetAddress(t *testing.T) {
+func TestSix910API_GetCart(t *testing.T) {
 	var sapi Six910API
 	//sapi.SetAPIKey("123")
 	sapi.storeID = 59
@@ -201,48 +185,15 @@ func TestSix910API_GetAddress(t *testing.T) {
 	var head Headers
 	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
 
-	res := api.GetAddress(4, 17, &head)
-	fmt.Println("add in get: ", *res)
+	res := api.GetCart(17, &head)
+	fmt.Println("cart in get: ", *res)
 
 	if res.ID == 0 {
 		t.Fail()
 	}
 }
 
-func TestSix910API_GetAddressList(t *testing.T) {
-	var sapi Six910API
-	//sapi.SetAPIKey("123")
-	sapi.storeID = 59
-
-	sapi.SetRestURL("http://localhost:3002")
-	sapi.SetStore("defaultLocalStore", "defaultLocalStore.mydomain.com")
-	sapi.SetAPIKey("GDG651GFD66FD16151sss651f651ff65555ddfhjklyy5")
-
-	api := sapi.GetNew()
-	sapi.SetLogLever(lg.AllLevel)
-
-	//---mock out the call
-	var gp px.MockGoProxy
-	var mres http.Response
-	mres.Body = ioutil.NopCloser(bytes.NewBufferString(`[{"id":1}]`))
-	gp.MockResp = &mres
-	gp.MockDoSuccess1 = true
-	gp.MockRespCode = 200
-	sapi.OverrideProxy(&gp)
-	//---end mock out the call
-
-	var head Headers
-	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
-
-	res := api.GetAddressList(17, &head)
-	fmt.Println("add in get: ", *res)
-
-	if (*res)[0].ID == 0 {
-		t.Fail()
-	}
-}
-
-func TestSix910API_DeleteAddress(t *testing.T) {
+func TestSix910API_DeleteCart(t *testing.T) {
 	var sapi Six910API
 	//sapi.SetAPIKey("123")
 	sapi.storeID = 59
@@ -267,8 +218,8 @@ func TestSix910API_DeleteAddress(t *testing.T) {
 	var head Headers
 	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
 
-	res := api.DeleteAddress(8, 17, &head)
-	fmt.Println("add in get: ", *res)
+	res := api.DeleteCart(5, 17, &head)
+	fmt.Println("cart in del: ", *res)
 
 	if !res.Success {
 		t.Fail()

@@ -27,6 +27,13 @@ import (
 	sdbi "github.com/Ulbora/six910-database-interface"
 )
 
+const (
+	post   = "POST"
+	put    = "PUT"
+	get    = "GET"
+	delete = "DELETE"
+)
+
 //ResponseID ResponseID
 type ResponseID struct {
 	ID      int64  `json:"id"`
@@ -84,23 +91,23 @@ func (h *Headers) Set(key string, value string) {
 type API interface {
 	//address
 	AddAddress(a *sdbi.Address, headers *Headers) *ResponseID
-	// UpdateAddress(a *sdbi.Address, sid int64) *Response
-	// GetAddress(id int64, cid int64, sid int64) *sdbi.Address
-	// GetAddressList(cid int64, sid int64) *[]sdbi.Address
-	// DeleteAddress(id int64, cid int64, sid int64) *Response
+	UpdateAddress(a *sdbi.Address, headers *Headers) *Response
+	GetAddress(id int64, cid int64, headers *Headers) *sdbi.Address
+	GetAddressList(cid int64, headers *Headers) *[]sdbi.Address
+	DeleteAddress(id int64, cid int64, headers *Headers) *Response
 
-	// //cart
-	// AddCart(c *sdbi.Cart) *ResponseID
-	// UpdateCart(c *sdbi.Cart) *Response
-	// GetCart(cid int64, storeID int64) *sdbi.Cart
-	// DeleteCart(id int64, cid int64, storeID int64) *Response
+	//cart
+	AddCart(c *sdbi.Cart, headers *Headers) *ResponseID
+	UpdateCart(c *sdbi.Cart, headers *Headers) *Response
+	GetCart(cid int64, headers *Headers) *sdbi.Cart
+	DeleteCart(id int64, cid int64, headers *Headers) *Response
 
-	// //cartItem
-	// AddCartItem(ci *sdbi.CartItem, cid int64, sid int64) *ResponseID
-	// UpdateCartItem(ci *sdbi.CartItem, cid int64, sid int64) *Response
-	// GetCarItem(cid int64, prodID int64, sid int64) *sdbi.CartItem
-	// GetCartItemList(cartID int64, cid int64, sid int64) *[]sdbi.CartItem
-	// DeleteCartItem(id int64, prodID int64, cartID int64) *Response
+	//cartItem
+	AddCartItem(ci *sdbi.CartItem, cid int64, headers *Headers) *ResponseID
+	UpdateCartItem(ci *sdbi.CartItem, cid int64, headers *Headers) *Response
+	GetCartItem(cid int64, prodID int64, headers *Headers) *sdbi.CartItem
+	GetCartItemList(cartID int64, cid int64, headers *Headers) *[]sdbi.CartItem
+	DeleteCartItem(id int64, prodID int64, cartID int64, headers *Headers) *Response
 
 	// //category
 	// AddCategory(c *sdbi.Category) *ResponseID
