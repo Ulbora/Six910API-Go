@@ -109,13 +109,13 @@ type API interface {
 	GetCartItemList(cartID int64, cid int64, headers *Headers) *[]sdbi.CartItem
 	DeleteCartItem(id int64, prodID int64, cartID int64, headers *Headers) *Response
 
-	// //category
-	// AddCategory(c *sdbi.Category) *ResponseID
-	// UpdateCategory(c *sdbi.Category) *Response
-	// GetCategory(id int64, sid int64) *sdbi.Category
-	// GetCategoryList(storeID int64) *[]sdbi.Category
-	// GetSubCategoryList(catID int64) *[]sdbi.Category
-	// DeleteCategory(id int64, sid int64) *Response
+	//category
+	AddCategory(c *sdbi.Category, headers *Headers) *ResponseID
+	UpdateCategory(c *sdbi.Category, headers *Headers) *Response
+	GetCategory(id int64, headers *Headers) *sdbi.Category
+	GetCategoryList(headers *Headers) *[]sdbi.Category
+	GetSubCategoryList(catID int64, headers *Headers) *[]sdbi.Category
+	DeleteCategory(id int64, headers *Headers) *Response
 
 	// //customer
 	// AddCustomer(c *sdbi.Customer) *ResponseID
