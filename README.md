@@ -6,7 +6,7 @@
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Six910API-Go&metric=alert_status)](https://sonarcloud.io/dashboard?id=Six910API-Go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Ulbora/Six910API-Go)](https://goreportcard.com/report/github.com/Ulbora/Six910API-Go)
 
-### The API for a Speeding Fast Shopping Cart
+### The Golang API for a Speeding Fast Shopping Cart
 An open source ecommerce platform server for building online shopping cart systems; written in golang. This is the Golang API for accessing Six910 services.
 
 This project is intended to be the storefront UI that works with Six910 REST implementation of a hosted ecommerce solution. 
