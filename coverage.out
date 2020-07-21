@@ -1,0 +1,13 @@
+mode: set
+github.com/Ulbora/Six910API-Go/address.go:27.80,30.36 3 1
+github.com/Ulbora/Six910API-Go/address.go:33.2,35.13 2 1
+github.com/Ulbora/Six910API-Go/address.go:30.36,32.3 1 1
+github.com/Ulbora/Six910API-Go/api.go:72.49,75.22 3 1
+github.com/Ulbora/Six910API-Go/api.go:78.2,78.24 1 1
+github.com/Ulbora/Six910API-Go/api.go:75.22,77.3 1 1
+github.com/Ulbora/Six910API-Go/six910Api.go:41.34,50.2 6 1
+github.com/Ulbora/Six910API-Go/six910Api.go:53.44,55.2 1 1
+github.com/Ulbora/Six910API-Go/six910Api.go:58.68,61.2 2 1
+github.com/Ulbora/Six910API-Go/six910Api.go:64.44,66.2 1 1
+github.com/Ulbora/Six910API-Go/six910Api.go:69.43,71.2 1 1
+github.com/Ulbora/Six910API-Go/six910Api.go:74.51,76.2 1 0

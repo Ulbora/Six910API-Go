@@ -1,25 +1,31 @@
 package six910api
 
-/*
- Six910 is a shopping cart and E-commerce system.
+import (
+	"sync"
 
- Copyright (C) 2020 Ulbora Labs LLC. (www.ulboralabs.com)
- All rights reserved.
+	/*
+	   Six910 is a shopping cart and E-commerce system.
 
- Copyright (C) 2020 Ken Williamson
- All rights reserved.
+	   Copyright (C) 2020 Ulbora Labs LLC. (www.ulboralabs.com)
+	   All rights reserved.
 
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
- You should have received a copy of the GNU General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*/
+	   Copyright (C) 2020 Ken Williamson
+	   All rights reserved.
+
+	   This program is free software: you can redistribute it and/or modify
+	   it under the terms of the GNU General Public License as published by
+	   the Free Software Foundation, either version 3 of the License, or
+	   (at your option) any later version.
+	   This program is distributed in the hope that it will be useful,
+	   but WITHOUT ANY WARRANTY; without even the implied warranty of
+	   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	   GNU General Public License for more details.
+	   You should have received a copy of the GNU General Public License
+	   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+	*/
+
+	sdbi "github.com/Ulbora/six910-database-interface"
+)
 
 //ResponseID ResponseID
 type ResponseID struct {
@@ -56,12 +62,28 @@ type UserResponse struct {
 	Enabled    bool   `json:"enabled"`
 }
 
+//Headers Headers
+type Headers struct {
+	headers map[string]string
+	mu      sync.Mutex
+}
+
+//Set Set
+func (h *Headers) Set(key string, value string) {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	if h.headers == nil {
+		h.headers = make(map[string]string)
+	}
+	h.headers[key] = value
+}
+
 // go mod init github.com/Ulbora/Six910API-Go
 
 //API API
 type API interface {
 	//address
-	// AddAddress(a *sdbi.Address, sid int64) *ResponseID
+	AddAddress(a *sdbi.Address, headers *Headers) *ResponseID
 	// UpdateAddress(a *sdbi.Address, sid int64) *Response
 	// GetAddress(id int64, cid int64, sid int64) *sdbi.Address
 	// GetAddressList(cid int64, sid int64) *[]sdbi.Address

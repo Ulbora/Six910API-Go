@@ -28,9 +28,13 @@ import (
 
 //Six910API Six910API
 type Six910API struct {
-	proxy   px.Proxy
-	log     *lg.Logger
-	RestURL string
+	proxy       px.Proxy
+	log         *lg.Logger
+	restURL     string
+	storeName   string
+	localDomain string
+	storeID     int64
+	apiKey      string
 }
 
 //GetNew GetNew
@@ -48,4 +52,25 @@ func (a *Six910API) GetNew() API {
 //SetLogLever SetLogLever
 func (a *Six910API) SetLogLever(level int) {
 	a.log.LogLevel = level
+}
+
+//SetStore SetStore
+func (a *Six910API) SetStore(storeName string, localDomain string) {
+	a.storeName = storeName
+	a.localDomain = localDomain
+}
+
+//SetRestURL SetRestURL
+func (a *Six910API) SetRestURL(url string) {
+	a.restURL = url
+}
+
+//SetAPIKey SetAPIKey
+func (a *Six910API) SetAPIKey(key string) {
+	a.apiKey = key
+}
+
+//OverrideProxy OverrideProxy
+func (a *Six910API) OverrideProxy(proxy px.Proxy) {
+	a.proxy = proxy
 }
