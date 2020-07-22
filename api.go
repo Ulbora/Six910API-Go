@@ -122,7 +122,7 @@ type API interface {
 	UpdateCustomer(c *sdbi.Customer, headers *Headers) *Response
 	GetCustomer(email string, headers *Headers) *sdbi.Customer
 	GetCustomerID(id int64, headers *Headers) *sdbi.Customer
-	GetCustomerList( headers *Headers) *[]sdbi.Customer
+	GetCustomerList(headers *Headers) *[]sdbi.Customer
 	DeleteCustomer(id int64, headers *Headers) *Response
 
 	// //dataStoreWriteLock
