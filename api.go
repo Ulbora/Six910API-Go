@@ -117,13 +117,13 @@ type API interface {
 	GetSubCategoryList(catID int64, headers *Headers) *[]sdbi.Category
 	DeleteCategory(id int64, headers *Headers) *Response
 
-	// //customer
-	// AddCustomer(c *sdbi.Customer) *ResponseID
-	// UpdateCustomer(c *sdbi.Customer) *Response
-	// GetCustomer(email string, storeID int64) *sdbi.Customer
-	// GetCustomerID(id int64, storeID int64) *sdbi.Customer
-	// GetCustomerList(storeID int64) *[]sdbi.Customer
-	// DeleteCustomer(id int64, storeID int64) *Response
+	//customer
+	AddCustomer(c *sdbi.Customer, headers *Headers) *ResponseID
+	UpdateCustomer(c *sdbi.Customer, headers *Headers) *Response
+	GetCustomer(email string, headers *Headers) *sdbi.Customer
+	GetCustomerID(id int64, headers *Headers) *sdbi.Customer
+	GetCustomerList( headers *Headers) *[]sdbi.Customer
+	DeleteCustomer(id int64, headers *Headers) *Response
 
 	// //dataStoreWriteLock
 	// AddDataStoreWriteLock(w *sdbi.DataStoreWriteLock) *Response
