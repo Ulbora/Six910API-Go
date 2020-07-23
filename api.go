@@ -125,48 +125,45 @@ type API interface {
 	GetCustomerList(headers *Headers) *[]sdbi.Customer
 	DeleteCustomer(id int64, headers *Headers) *Response
 
-	// //dataStoreWriteLock
-	// AddDataStoreWriteLock(w *sdbi.DataStoreWriteLock) *Response
-	// UpdateDataStoreWriteLock(w *sdbi.DataStoreWriteLock) *Response
-	// GetDataStoreWriteLock(dataStore string, storeID int64) *sdbi.DataStoreWriteLock
+	//dataStoreWriteLock
+	AddDataStoreWriteLock(w *sdbi.DataStoreWriteLock, headers *Headers) *Response
+	UpdateDataStoreWriteLock(w *sdbi.DataStoreWriteLock, headers *Headers) *Response
+	GetDataStoreWriteLock(dataStore string, headers *Headers) *sdbi.DataStoreWriteLock
 
-	// //dataStore
-	// AddLocalDatastore(d *sdbi.LocalDataStore) *Response
-	// UpdateLocalDatastore(d *sdbi.LocalDataStore) *Response
-	// GetLocalDatastore(storeID int64, dataStoreName string) *sdbi.LocalDataStore
+	//dataStore
+	AddLocalDatastore(d *sdbi.LocalDataStore, headers *Headers) *Response
+	UpdateLocalDatastore(d *sdbi.LocalDataStore, headers *Headers) *Response
+	GetLocalDatastore(dataStoreName string, headers *Headers) *sdbi.LocalDataStore
 
-	// //distrubutor
-	// AddDistributor(d *sdbi.Distributor) *ResponseID
-	// UpdateDistributor(d *sdbi.Distributor) *Response
-	// GetDistributor(id int64, storeID int64) *sdbi.Distributor
-	// GetDistributorList(storeID int64) *[]sdbi.Distributor
-	// DeleteDistributor(id int64, storeID int64) *Response
+	//distrubutor
+	AddDistributor(d *sdbi.Distributor, headers *Headers) *ResponseID
+	UpdateDistributor(d *sdbi.Distributor, headers *Headers) *Response
+	GetDistributor(id int64, headers *Headers) *sdbi.Distributor
+	GetDistributorList(headers *Headers) *[]sdbi.Distributor
+	DeleteDistributor(id int64, headers *Headers) *Response
 
-	// //excluded sub region
-	// AddExcludedSubRegion(e *sdbi.ExcludedSubRegion, sid int64) *ResponseID
-	// UpdateExcludedSubRegion(e *sdbi.ExcludedSubRegion, sid int64) *Response
-	// GetExcludedSubRegion(id int64, sid int64) *sdbi.ExcludedSubRegion
-	// GetExcludedSubRegionList(regionID int64, sid int64) *[]sdbi.ExcludedSubRegion
-	// DeleteExcludedSubRegion(id int64, regionID int64, sid int64) *Response
+	//excluded sub region
+	AddExcludedSubRegion(e *sdbi.ExcludedSubRegion, headers *Headers) *ResponseID
+	GetExcludedSubRegionList(regionID int64, headers *Headers) *[]sdbi.ExcludedSubRegion
+	DeleteExcludedSubRegion(id int64, regionID int64, headers *Headers) *Response
 
-	// //included sub region
-	// AddIncludedSubRegion(e *sdbi.IncludedSubRegion, sid int64) *ResponseID
-	// UpdateIncludedSubRegion(e *sdbi.IncludedSubRegion, sid int64) *Response
-	// GetIncludedSubRegion(id int64, sid int64) *sdbi.IncludedSubRegion
-	// GetIncludedSubRegionList(regionID int64, sid int64) *[]sdbi.IncludedSubRegion
-	// DeleteIncludedSubRegion(id int64, regionID int64, sid int64) *Response
+	//included sub region
+	AddIncludedSubRegion(e *sdbi.IncludedSubRegion, headers *Headers) *ResponseID
+	GetIncludedSubRegionList(regionID int64, headers *Headers) *[]sdbi.IncludedSubRegion
+	DeleteIncludedSubRegion(id int64, regionID int64, headers *Headers) *Response
 
-	// //instances
-	// AddInstance(i *sdbi.Instances) *Response
-	// UpdateInstance(i *sdbi.Instances) *Response
-	// GetInstance(name string, dataStoreName string, storeID int64) *sdbi.Instances
+	//instances
+	AddInstance(i *sdbi.Instances, headers *Headers) *Response
+	UpdateInstance(i *sdbi.Instances, headers *Headers) *Response
+	GetInstance(name string, dataStoreName string, headers *Headers) *sdbi.Instances
+	GetInstanceList(dataStoreName string, headers *Headers) *[]sdbi.Instances
 
-	// //insurance
-	// AddInsurance(i *sdbi.Insurance) *ResponseID
-	// UpdateInsurance(i *sdbi.Insurance) *Response
-	// GetInsurance(id int64, sid int64) *sdbi.Insurance
-	// GetInsuranceList(storeID int64) *[]sdbi.Insurance
-	// DeleteInsurance(id int64, sid int64) *Response
+	// insurance
+	AddInsurance(i *sdbi.Insurance, headers *Headers) *ResponseID
+	UpdateInsurance(i *sdbi.Insurance, headers *Headers) *Response
+	GetInsurance(id int64, headers *Headers) *sdbi.Insurance
+	GetInsuranceList( headers *Headers) *[]sdbi.Insurance
+	DeleteInsurance(id int64, headers *Headers) *Response
 
 	// //order
 	// AddOrder(o *sdbi.Order) *ResponseID
