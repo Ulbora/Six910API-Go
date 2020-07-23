@@ -162,7 +162,7 @@ type API interface {
 	AddInsurance(i *sdbi.Insurance, headers *Headers) *ResponseID
 	UpdateInsurance(i *sdbi.Insurance, headers *Headers) *Response
 	GetInsurance(id int64, headers *Headers) *sdbi.Insurance
-	GetInsuranceList( headers *Headers) *[]sdbi.Insurance
+	GetInsuranceList(headers *Headers) *[]sdbi.Insurance
 	DeleteInsurance(id int64, headers *Headers) *Response
 
 	// //order
