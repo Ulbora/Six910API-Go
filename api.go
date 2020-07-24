@@ -165,50 +165,50 @@ type API interface {
 	GetInsuranceList(headers *Headers) *[]sdbi.Insurance
 	DeleteInsurance(id int64, headers *Headers) *Response
 
-	// //order
-	// AddOrder(o *sdbi.Order) *ResponseID
-	// UpdateOrder(o *sdbi.Order) *Response
-	// GetOrder(id int64, sid int64) *sdbi.Order
-	// GetOrderList(cid int64, sid int64) *[]sdbi.Order
-	// DeleteOrder(id int64, sid int64) *Response
+	//order
+	AddOrder(o *sdbi.Order, headers *Headers) *ResponseID
+	UpdateOrder(o *sdbi.Order, headers *Headers) *Response
+	GetOrder(id int64, headers *Headers) *sdbi.Order
+	GetOrderList(cid int64, headers *Headers) *[]sdbi.Order
+	DeleteOrder(id int64, headers *Headers) *Response
 
-	// //order comments
-	// AddOrderComments(c *sdbi.OrderComment, sid int64) *ResponseID
-	// GetOrderCommentList(orderID int64, sid int64) *[]sdbi.OrderComment
+	//order comments
+	AddOrderComments(c *sdbi.OrderComment, headers *Headers) *ResponseID
+	GetOrderCommentList(orderID int64, headers *Headers) *[]sdbi.OrderComment
 
-	// //order items
-	// AddOrderItem(i *sdbi.OrderItem, sid int64) *ResponseID
-	// UpdateOrderItem(i *sdbi.OrderItem, sid int64) *Response
-	// GetOrderItem(id int64, sid int64) *sdbi.OrderItem
-	// GetOrderItemList(orderID int64, sid int64) *[]sdbi.OrderItem
-	// DeleteOrderItem(id int64, sid int64) *Response
+	//order items
+	AddOrderItem(i *sdbi.OrderItem, headers *Headers) *ResponseID
+	UpdateOrderItem(i *sdbi.OrderItem, headers *Headers) *Response
+	GetOrderItem(id int64, headers *Headers) *sdbi.OrderItem
+	GetOrderItemList(orderID int64, headers *Headers) *[]sdbi.OrderItem
+	DeleteOrderItem(id int64, headers *Headers) *Response
 
-	// //order transaction
-	// AddOrderTransaction(t *sdbi.OrderTransaction, sid int64) *ResponseID
-	// GetOrderTransactionList(orderID int64, sid int64) *[]sdbi.OrderTransaction
+	//order transaction
+	AddOrderTransaction(t *sdbi.OrderTransaction, headers *Headers) *ResponseID
+	GetOrderTransactionList(orderID int64, headers *Headers) *[]sdbi.OrderTransaction
 
-	// //payment gateway
-	// AddPaymentGateway(pgw *sdbi.PaymentGateway, sid int64) *ResponseID
-	// UpdatePaymentGateway(pgw *sdbi.PaymentGateway, sid int64) *Response
-	// GetPaymentGateway(id int64, sid int64) *sdbi.PaymentGateway
-	// GetPaymentGateways(storeID int64) *[]sdbi.PaymentGateway
-	// DeletePaymentGateway(id int64, sid int64) *Response
+	//payment gateway
+	AddPaymentGateway(pgw *sdbi.PaymentGateway, headers *Headers) *ResponseID
+	UpdatePaymentGateway(pgw *sdbi.PaymentGateway, headers *Headers) *Response
+	GetPaymentGateway(id int64, headers *Headers) *sdbi.PaymentGateway
+	GetPaymentGateways(headers *Headers) *[]sdbi.PaymentGateway
+	DeletePaymentGateway(id int64, headers *Headers) *Response
 
-	// //plugins
-	// AddPlugin(p *sdbi.Plugins) *ResponseID
-	// UpdatePlugin(p *sdbi.Plugins) *Response
-	// GetPlugin(id int64) *sdbi.Plugins
-	// GetPluginList(start int64, end int64) *[]sdbi.Plugins
-	// DeletePlugin(id int64) *Response
+	//plugins
+	AddPlugin(p *sdbi.Plugins, headers *Headers) *ResponseID
+	UpdatePlugin(p *sdbi.Plugins, headers *Headers) *Response
+	GetPlugin(id int64, headers *Headers) *sdbi.Plugins
+	GetPluginList(start int64, end int64, headers *Headers) *[]sdbi.Plugins
+	DeletePlugin(id int64, headers *Headers) *Response
 
-	// //products
-	// AddProduct(p *sdbi.Product) *ResponseID
-	// UpdateProduct(p *sdbi.Product) *Response
-	// GetProductByID(id int64, sid int64) *sdbi.Product
-	// GetProductsByName(name string, sid int64, start int64, end int64) *[]sdbi.Product
-	// GetProductsByCaterory(catID int64, sid int64, start int64, end int64) *[]sdbi.Product
-	// GetProductList(storeID int64, start int64, end int64) *[]sdbi.Product
-	// DeleteProduct(id int64, sid int64) *Response
+	//products
+	AddProduct(p *sdbi.Product, headers *Headers) *ResponseID
+	UpdateProduct(p *sdbi.Product, headers *Headers) *Response
+	GetProductByID(id int64, headers *Headers) *sdbi.Product
+	GetProductsByName(name string, start int64, end int64, headers *Headers) *[]sdbi.Product
+	GetProductsByCaterory(catID int64, start int64, end int64, headers *Headers) *[]sdbi.Product
+	GetProductList(start int64, end int64, headers *Headers) *[]sdbi.Product
+	DeleteProduct(id int64, headers *Headers) *Response
 
 	// //product category
 	// AddProductCategory(pc *sdbi.ProductCategory, sid int64) *Response
