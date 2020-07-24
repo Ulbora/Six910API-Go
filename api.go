@@ -210,9 +210,9 @@ type API interface {
 	GetProductList(start int64, end int64, headers *Headers) *[]sdbi.Product
 	DeleteProduct(id int64, headers *Headers) *Response
 
-	// //product category
-	// AddProductCategory(pc *sdbi.ProductCategory, sid int64) *Response
-	// DeleteProductCategory(pc *sdbi.ProductCategory, sid int64) *Response
+	//product category
+	AddProductCategory(pc *sdbi.ProductCategory, headers *Headers) *Response
+	DeleteProductCategory(pc *sdbi.ProductCategory, headers *Headers) *Response
 
 	// //region
 	// AddRegion(r *sdbi.Region) *ResponseID
