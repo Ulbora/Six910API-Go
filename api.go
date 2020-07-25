@@ -214,48 +214,48 @@ type API interface {
 	AddProductCategory(pc *sdbi.ProductCategory, headers *Headers) *Response
 	DeleteProductCategory(pc *sdbi.ProductCategory, headers *Headers) *Response
 
-	// //region
-	// AddRegion(r *sdbi.Region) *ResponseID
-	// UpdateRegion(r *sdbi.Region) *Response
-	// GetRegion(id int64, sid int64) *sdbi.Region
-	// GetRegionList(storeID int64) *[]sdbi.Region
-	// DeleteRegion(id int64, sid int64) *Response
+	//region
+	AddRegion(r *sdbi.Region, headers *Headers) *ResponseID
+	UpdateRegion(r *sdbi.Region, headers *Headers) *Response
+	GetRegion(id int64, headers *Headers) *sdbi.Region
+	GetRegionList(headers *Headers) *[]sdbi.Region
+	DeleteRegion(id int64, headers *Headers) *Response
 
-	// //shipment
-	// AddShipment(s *sdbi.Shipment, sid int64) *ResponseID
-	// UpdateShipment(s *sdbi.Shipment, sid int64) *Response
-	// GetShipment(id int64, sid int64) *sdbi.Shipment
-	// GetShipmentList(orderID int64, sid int64) *[]sdbi.Shipment
-	// DeleteShipment(id int64, sid int64) *Response
+	//shipment
+	AddShipment(s *sdbi.Shipment, headers *Headers) *ResponseID
+	UpdateShipment(s *sdbi.Shipment, headers *Headers) *Response
+	GetShipment(id int64, headers *Headers) *sdbi.Shipment
+	GetShipmentList(orderID int64, headers *Headers) *[]sdbi.Shipment
+	DeleteShipment(id int64, headers *Headers) *Response
 
-	// //shipment box
-	// AddShipmentBox(sb *sdbi.ShipmentBox, sid int64) *ResponseID
-	// UpdateShipmentBox(sb *sdbi.ShipmentBox, sid int64) *Response
-	// GetShipmentBox(id int64, sid int64) *sdbi.ShipmentBox
-	// GetShipmentBoxList(shipmentID int64, sid int64) *[]sdbi.ShipmentBox
-	// DeleteShipmentBox(id int64, sid int64) *Response
+	//shipment box
+	AddShipmentBox(sb *sdbi.ShipmentBox, headers *Headers) *ResponseID
+	UpdateShipmentBox(sb *sdbi.ShipmentBox, headers *Headers) *Response
+	GetShipmentBox(id int64, headers *Headers) *sdbi.ShipmentBox
+	GetShipmentBoxList(shipmentID int64, headers *Headers) *[]sdbi.ShipmentBox
+	DeleteShipmentBox(id int64, headers *Headers) *Response
 
-	// //shipment item
-	// AddShipmentItem(si *sdbi.ShipmentItem, sid int64) *ResponseID
-	// UpdateShipmentItem(si *sdbi.ShipmentItem, sid int64) *Response
-	// GetShipmentItem(id int64, sid int64) *sdbi.ShipmentItem
-	// GetShipmentItemList(shipmentID int64, sid int64) *[]sdbi.ShipmentItem
-	// GetShipmentItemListByBox(boxNumber int64, shipmentID int64, sid int64) *[]sdbi.ShipmentItem
-	// DeleteShipmentItem(id int64, sid int64) *Response
+	//shipment item
+	AddShipmentItem(si *sdbi.ShipmentItem, headers *Headers) *ResponseID
+	UpdateShipmentItem(si *sdbi.ShipmentItem, headers *Headers) *Response
+	GetShipmentItem(id int64, headers *Headers) *sdbi.ShipmentItem
+	GetShipmentItemList(shipmentID int64, headers *Headers) *[]sdbi.ShipmentItem
+	GetShipmentItemListByBox(boxNumber int64, shipmentID int64, headers *Headers) *[]sdbi.ShipmentItem
+	DeleteShipmentItem(id int64, headers *Headers) *Response
 
-	// //shipment carrier
-	// AddShippingCarrier(c *sdbi.ShippingCarrier) *ResponseID
-	// UpdateShippingCarrier(c *sdbi.ShippingCarrier) *Response
-	// GetShippingCarrier(id int64, sid int64) *sdbi.ShippingCarrier
-	// GetShippingCarrierList(storeID int64) *[]sdbi.ShippingCarrier
-	// DeleteShippingCarrier(id int64, sid int64) *Response
+	//shipment carrier
+	AddShippingCarrier(c *sdbi.ShippingCarrier, headers *Headers) *ResponseID
+	UpdateShippingCarrier(c *sdbi.ShippingCarrier, headers *Headers) *Response
+	GetShippingCarrier(id int64, headers *Headers) *sdbi.ShippingCarrier
+	GetShippingCarrierList(headers *Headers) *[]sdbi.ShippingCarrier
+	DeleteShippingCarrier(id int64, headers *Headers) *Response
 
-	// //shipment method
-	// AddShippingMethod(s *sdbi.ShippingMethod) *ResponseID
-	// UpdateShippingMethod(s *sdbi.ShippingMethod) *Response
-	// GetShippingMethod(id int64, sid int64) *sdbi.ShippingMethod
-	// GetShippingMethodList(storeID int64) *[]sdbi.ShippingMethod
-	// DeleteShippingMethod(id int64, sid int64) *Response
+	//shipment method
+	AddShippingMethod(s *sdbi.ShippingMethod, headers *Headers) *ResponseID
+	UpdateShippingMethod(s *sdbi.ShippingMethod, headers *Headers) *Response
+	GetShippingMethod(id int64, headers *Headers) *sdbi.ShippingMethod
+	GetShippingMethodList(headers *Headers) *[]sdbi.ShippingMethod
+	DeleteShippingMethod(id int64, headers *Headers) *Response
 
 	// //store
 	// AddStore(s *sdbi.Store) *ResponseID
