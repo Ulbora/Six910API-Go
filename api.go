@@ -263,12 +263,12 @@ type API interface {
 	GetStore(sname string, localDomain string, headers *Headers) *sdbi.Store
 	DeleteStore(sname string, localDomain string, headers *Headers) *Response
 
-	// //store plugin
-	// AddStorePlugin(sp *sdbi.StorePlugins) *ResponseID
-	// UpdateStorePlugin(sp *sdbi.StorePlugins) *Response
-	// GetStorePlugin(id int64, sid int64) *sdbi.StorePlugins
-	// GetStorePluginList(storeID int64) *[]sdbi.StorePlugins
-	// DeleteStorePlugin(id int64, sid int64) *Response
+	//store plugin
+	AddStorePlugin(sp *sdbi.StorePlugins, headers *Headers) *ResponseID
+	UpdateStorePlugin(sp *sdbi.StorePlugins, headers *Headers) *Response
+	GetStorePlugin(id int64, headers *Headers) *sdbi.StorePlugins
+	GetStorePluginList(headers *Headers) *[]sdbi.StorePlugins
+	DeleteStorePlugin(id int64, headers *Headers) *Response
 
 	// //sub region
 	// AddSubRegion(s *sdbi.SubRegion, sid int64) *ResponseID
