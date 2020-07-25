@@ -3,29 +3,29 @@ package six910api
 import (
 	"sync"
 
-	/*
-	   Six910 is a shopping cart and E-commerce system.
-
-	   Copyright (C) 2020 Ulbora Labs LLC. (www.ulboralabs.com)
-	   All rights reserved.
-
-	   Copyright (C) 2020 Ken Williamson
-	   All rights reserved.
-
-	   This program is free software: you can redistribute it and/or modify
-	   it under the terms of the GNU General Public License as published by
-	   the Free Software Foundation, either version 3 of the License, or
-	   (at your option) any later version.
-	   This program is distributed in the hope that it will be useful,
-	   but WITHOUT ANY WARRANTY; without even the implied warranty of
-	   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	   GNU General Public License for more details.
-	   You should have received a copy of the GNU General Public License
-	   along with this program.  If not, see <http://www.gnu.org/licenses/>.
-	*/
-
 	sdbi "github.com/Ulbora/six910-database-interface"
 )
+
+/*
+   Six910 is a shopping cart and E-commerce system.
+
+   Copyright (C) 2020 Ulbora Labs LLC. (www.ulboralabs.com)
+   All rights reserved.
+
+   Copyright (C) 2020 Ken Williamson
+   All rights reserved.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 const (
 	post   = "POST"
@@ -257,11 +257,11 @@ type API interface {
 	GetShippingMethodList(headers *Headers) *[]sdbi.ShippingMethod
 	DeleteShippingMethod(id int64, headers *Headers) *Response
 
-	// //store
-	// AddStore(s *sdbi.Store) *ResponseID
-	// UpdateStore(s *sdbi.Store) *Response
-	// GetStore(sname string, localDomain string) *sdbi.Store
-	// DeleteStore(sname string, localDomain string) *Response
+	//store
+	AddStore(s *sdbi.Store, headers *Headers) *ResponseID
+	UpdateStore(s *sdbi.Store, headers *Headers) *Response
+	GetStore(sname string, localDomain string, headers *Headers) *sdbi.Store
+	DeleteStore(sname string, localDomain string, headers *Headers) *Response
 
 	// //store plugin
 	// AddStorePlugin(sp *sdbi.StorePlugins) *ResponseID
