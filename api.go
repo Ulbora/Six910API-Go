@@ -270,12 +270,12 @@ type API interface {
 	GetStorePluginList(headers *Headers) *[]sdbi.StorePlugins
 	DeleteStorePlugin(id int64, headers *Headers) *Response
 
-	// //sub region
-	// AddSubRegion(s *sdbi.SubRegion, sid int64) *ResponseID
-	// UpdateSubRegion(s *sdbi.SubRegion, sid int64) *Response
-	// GetSubRegion(id int64, sid int64) *sdbi.SubRegion
-	// GetSubRegionList(regionID int64, sid int64) *[]sdbi.SubRegion
-	// DeleteSubRegion(id int64, sid int64) *Response
+	//sub region
+	AddSubRegion(s *sdbi.SubRegion, headers *Headers) *ResponseID
+	UpdateSubRegion(s *sdbi.SubRegion, headers *Headers) *Response
+	GetSubRegion(id int64, headers *Headers) *sdbi.SubRegion
+	GetSubRegionList(regionID int64, headers *Headers) *[]sdbi.SubRegion
+	DeleteSubRegion(id int64, headers *Headers) *Response
 
 	// //user
 	// AddCustomerUser(u *User) *Response
