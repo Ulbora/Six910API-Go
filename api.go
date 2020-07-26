@@ -277,16 +277,16 @@ type API interface {
 	GetSubRegionList(regionID int64, headers *Headers) *[]sdbi.SubRegion
 	DeleteSubRegion(id int64, headers *Headers) *Response
 
-	// //user
-	// AddCustomerUser(u *User) *Response
-	// UpdateUser(u *User) *Response
-	// GetUser(u *User) *UserResponse
-	// GetAdminUsers(storeID int64) *[]UserResponse
-	// GetCustomerUsers(storeID int64) *[]UserResponse
+	//user
+	AddCustomerUser(u *User, headers *Headers) *Response
+	UpdateUser(u *User, headers *Headers) *Response
+	GetUser(u *User, headers *Headers) *UserResponse
+	GetAdminUsers(headers *Headers) *[]UserResponse
+	GetCustomerUsers(headers *Headers) *[]UserResponse
 
 	// //zip code zone
-	// AddZoneZip(z *sdbi.ZoneZip, sid int64) *ResponseID
-	// GetZoneZipListByExclusion(exID int64, sid int64) *[]sdbi.ZoneZip
-	// GetZoneZipListByInclusion(incID int64, sid int64) *[]sdbi.ZoneZip
-	// DeleteZoneZip(id int64, incID int64, exID int64, sid int64) *Response
+	// AddZoneZip(z *sdbi.ZoneZip, headers *Headers) *ResponseID
+	// GetZoneZipListByExclusion(exID int64, headers *Headers) *[]sdbi.ZoneZip
+	// GetZoneZipListByInclusion(incID int64, headers *Headers) *[]sdbi.ZoneZip
+	// DeleteZoneZip(id int64, incID int64, exID int64, headers *Headers) *Response
 }
