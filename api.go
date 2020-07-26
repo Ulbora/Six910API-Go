@@ -284,9 +284,9 @@ type API interface {
 	GetAdminUsers(headers *Headers) *[]UserResponse
 	GetCustomerUsers(headers *Headers) *[]UserResponse
 
-	// //zip code zone
-	// AddZoneZip(z *sdbi.ZoneZip, headers *Headers) *ResponseID
-	// GetZoneZipListByExclusion(exID int64, headers *Headers) *[]sdbi.ZoneZip
-	// GetZoneZipListByInclusion(incID int64, headers *Headers) *[]sdbi.ZoneZip
-	// DeleteZoneZip(id int64, incID int64, exID int64, headers *Headers) *Response
+	//zip code zone
+	AddZoneZip(z *sdbi.ZoneZip, headers *Headers) *ResponseID
+	GetZoneZipListByExclusion(exID int64, headers *Headers) *[]sdbi.ZoneZip
+	GetZoneZipListByInclusion(incID int64, headers *Headers) *[]sdbi.ZoneZip
+	DeleteZoneZip(id int64, incID int64, exID int64, headers *Headers) *Response
 }
