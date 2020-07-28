@@ -42,3 +42,19 @@ func TestSix910API_getStoreID(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestSix910API_SetStoreID(t *testing.T) {
+	var sapi Six910API
+
+	sapi.GetNew()
+	sapi.SetLogLever(lg.AllLevel)
+
+	sapi.SetStoreID(5)
+	var head Headers
+	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
+	res := sapi.getStoreID(&head)
+
+	if res != 5 {
+		t.Fail()
+	}
+}

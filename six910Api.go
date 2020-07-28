@@ -118,3 +118,8 @@ func (a *Six910API) SetAPIKey(key string) {
 func (a *Six910API) OverrideProxy(proxy px.Proxy) {
 	a.proxy = proxy
 }
+
+//SetStoreID SetStoreID
+func (a *Six910API) SetStoreID(sid int64) {
+	a.storeID = sid
+}
