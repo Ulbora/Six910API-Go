@@ -85,6 +85,23 @@ func (a *Six910API) GetProductByID(id int64, headers *Headers) *sdbi.Product {
 	return &rtn
 }
 
+//GetProductBySku GetProductBySku
+func (a *Six910API) GetProductBySku(sku string, did int64, headers *Headers) *sdbi.Product {
+	var rtn sdbi.Product
+	var ctsid = a.getStoreID(headers)
+	didStrgpd := strconv.FormatInt(did, 10)
+	sidStrgod := strconv.FormatInt(ctsid, 10)
+	var url = a.restURL + "/rs/product/get/sku/" + sku + "/" + didStrgpd + "/" + sidStrgod
+	a.log.Debug("url: ", url)
+
+	req := a.buildRequest(get, url, headers, nil)
+	odgsuc, stat := a.proxy.Do(req, &rtn)
+	a.log.Debug("suc: ", odgsuc)
+	a.log.Debug("stat: ", stat)
+
+	return &rtn
+}
+
 //GetProductsByName GetProductsByName
 func (a *Six910API) GetProductsByName(name string, start int64, end int64, headers *Headers) *[]sdbi.Product {
 	var rtn []sdbi.Product

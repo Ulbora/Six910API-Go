@@ -205,6 +205,7 @@ type API interface {
 	AddProduct(p *sdbi.Product, headers *Headers) *ResponseID
 	UpdateProduct(p *sdbi.Product, headers *Headers) *Response
 	GetProductByID(id int64, headers *Headers) *sdbi.Product
+	GetProductBySku(sku string, did int64, headers *Headers) *sdbi.Product
 	GetProductsByName(name string, start int64, end int64, headers *Headers) *[]sdbi.Product
 	GetProductsByCaterory(catID int64, start int64, end int64, headers *Headers) *[]sdbi.Product
 	GetProductList(start int64, end int64, headers *Headers) *[]sdbi.Product
