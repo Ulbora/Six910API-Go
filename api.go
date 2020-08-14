@@ -170,6 +170,8 @@ type API interface {
 	UpdateOrder(o *sdbi.Order, headers *Headers) *Response
 	GetOrder(id int64, headers *Headers) *sdbi.Order
 	GetOrderList(cid int64, headers *Headers) *[]sdbi.Order
+	GetStoreOrderList(headers *Headers) *[]sdbi.Order
+	GetStoreOrderListByStatus(status string, headers *Headers) *[]sdbi.Order
 	DeleteOrder(id int64, headers *Headers) *Response
 
 	//order comments

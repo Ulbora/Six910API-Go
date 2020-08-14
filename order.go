@@ -103,6 +103,40 @@ func (a *Six910API) GetOrderList(cid int64, headers *Headers) *[]sdbi.Order {
 	return &rtn
 }
 
+//GetStoreOrderList GetStoreOrderList
+func (a *Six910API) GetStoreOrderList(headers *Headers) *[]sdbi.Order {
+	var rtn []sdbi.Order
+	var ssid = a.getStoreID(headers)
+	sidStrGodl := strconv.FormatInt(ssid, 10)
+
+	var url = a.restURL + "/rs/order/get/store/list/" + sidStrGodl
+	a.log.Debug("url: ", url)
+
+	sreq := a.buildRequest(get, url, headers, nil)
+	sodlsuc, sstat := a.proxy.Do(sreq, &rtn)
+	a.log.Debug("suc: ", sodlsuc)
+	a.log.Debug("stat: ", sstat)
+
+	return &rtn
+}
+
+//GetStoreOrderListByStatus GetStoreOrderListByStatus
+func (a *Six910API) GetStoreOrderListByStatus(status string, headers *Headers) *[]sdbi.Order {
+	var rtn []sdbi.Order
+	var sid = a.getStoreID(headers)
+	sssidStrGodl := strconv.FormatInt(sid, 10)
+
+	var url = a.restURL + "/rs/order/get/store/list/status/" + status + "/" + sssidStrGodl
+	a.log.Debug("url: ", url)
+
+	ssreq := a.buildRequest(get, url, headers, nil)
+	ssodlsuc, ssstat := a.proxy.Do(ssreq, &rtn)
+	a.log.Debug("suc: ", ssodlsuc)
+	a.log.Debug("stat: ", ssstat)
+
+	return &rtn
+}
+
 //DeleteOrder DeleteOrder
 func (a *Six910API) DeleteOrder(id int64, headers *Headers) *Response {
 	var rtn Response
