@@ -41,6 +41,8 @@ func TestSix910API_AddOrder(t *testing.T) {
 	crt.OrderType = "delivery"
 	crt.Subtotal = 100.25
 	crt.Total = 100.25
+	crt.ShippingMethodID = 4
+	crt.ShippingMethodName = "UPS Ground"
 
 	var head Headers
 	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
