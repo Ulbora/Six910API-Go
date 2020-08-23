@@ -102,6 +102,25 @@ func (a *Six910API) GetProductBySku(sku string, did int64, headers *Headers) *sd
 	return &rtn
 }
 
+//GetProductsByPromoted GetProductsByPromoted
+func (a *Six910API) GetProductsByPromoted(start int64, end int64, headers *Headers) *[]sdbi.Product {
+	var rtn []sdbi.Product
+	var prsid = a.getStoreID(headers)
+	prstStrgodl := strconv.FormatInt(start, 10)
+	prendStrgodl := strconv.FormatInt(end, 10)
+	prsidStrGodl := strconv.FormatInt(prsid, 10)
+
+	var url = a.restURL + "/rs/product/get/promoted/" + prsidStrGodl + "/" + prstStrgodl + "/" + prendStrgodl
+	a.log.Debug("url: ", url)
+
+	req := a.buildRequest(get, url, headers, nil)
+	prpdnlsuc, stat := a.proxy.Do(req, &rtn)
+	a.log.Debug("suc: ", prpdnlsuc)
+	a.log.Debug("stat: ", stat)
+
+	return &rtn
+}
+
 //GetProductsByName GetProductsByName
 func (a *Six910API) GetProductsByName(name string, start int64, end int64, headers *Headers) *[]sdbi.Product {
 	var rtn []sdbi.Product
