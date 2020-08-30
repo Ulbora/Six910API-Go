@@ -165,6 +165,12 @@ type API interface {
 	GetInsuranceList(headers *Headers) *[]sdbi.Insurance
 	DeleteInsurance(id int64, headers *Headers) *Response
 
+	AddTaxRate(t *sdbi.TaxRate, headers *Headers) *ResponseID
+	UpdateTaxRate(t *sdbi.TaxRate, headers *Headers) *Response
+	GetTaxRate(country string, state string, headers *Headers) *[]sdbi.TaxRate
+	GetTaxRateList(headers *Headers) *[]sdbi.TaxRate
+	DeleteTaxRate(id int64, headers *Headers) *Response
+
 	//order
 	AddOrder(o *sdbi.Order, headers *Headers) *ResponseID
 	UpdateOrder(o *sdbi.Order, headers *Headers) *Response
