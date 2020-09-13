@@ -85,6 +85,23 @@ func (a *Six910API) GetCategory(id int64, headers *Headers) *sdbi.Category {
 	return &rtn
 }
 
+//GetHierarchicalCategoryList GetHierarchicalCategoryList
+func (a *Six910API) GetHierarchicalCategoryList(headers *Headers) *[]sdbi.Category {
+	var rtn []sdbi.Category
+	var sid = a.getStoreID(headers)
+	hsidStrGctl := strconv.FormatInt(sid, 10)
+
+	var url = a.restURL + "/rs/category/get/list/hierarchical/" + hsidStrGctl
+	a.log.Debug("url: ", url)
+
+	req := a.buildRequest(get, url, headers, nil)
+	hausuc, stat := a.proxy.Do(req, &rtn)
+	a.log.Debug("suc: ", hausuc)
+	a.log.Debug("stat: ", stat)
+
+	return &rtn
+}
+
 //GetCategoryList GetCategoryList
 func (a *Six910API) GetCategoryList(headers *Headers) *[]sdbi.Category {
 	var rtn []sdbi.Category

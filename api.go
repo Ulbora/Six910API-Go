@@ -113,6 +113,7 @@ type API interface {
 	AddCategory(c *sdbi.Category, headers *Headers) *ResponseID
 	UpdateCategory(c *sdbi.Category, headers *Headers) *Response
 	GetCategory(id int64, headers *Headers) *sdbi.Category
+	GetHierarchicalCategoryList(headers *Headers) *[]sdbi.Category
 	GetCategoryList(headers *Headers) *[]sdbi.Category
 	GetSubCategoryList(catID int64, headers *Headers) *[]sdbi.Category
 	DeleteCategory(id int64, headers *Headers) *Response
