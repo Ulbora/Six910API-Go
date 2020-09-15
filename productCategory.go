@@ -56,6 +56,23 @@ func (a *Six910API) AddProductCategory(pc *sdbi.ProductCategory, headers *Header
 	return &rtn
 }
 
+//GetProductCategoryList GetProductCategoryList
+func (a *Six910API) GetProductCategoryList(productID int64, headers *Headers) []int64 {
+	var rtn []int64
+
+	pidStrGctl := strconv.FormatInt(productID, 10)
+
+	var url = a.restURL + "/rs/productCategory/list/" + pidStrGctl
+	a.log.Debug("url: ", url)
+
+	req := a.buildRequest(get, url, headers, nil)
+	ausuc, stat := a.proxy.Do(req, &rtn)
+	a.log.Debug("suc: ", ausuc)
+	a.log.Debug("stat: ", stat)
+
+	return rtn
+}
+
 //DeleteProductCategory DeleteProductCategory
 func (a *Six910API) DeleteProductCategory(pc *sdbi.ProductCategory, headers *Headers) *Response {
 	var rtn Response

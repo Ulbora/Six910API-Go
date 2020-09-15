@@ -223,6 +223,7 @@ type API interface {
 
 	//product category
 	AddProductCategory(pc *sdbi.ProductCategory, headers *Headers) *Response
+	GetProductCategoryList(productID int64, headers *Headers) []int64
 	DeleteProductCategory(pc *sdbi.ProductCategory, headers *Headers) *Response
 
 	//region
