@@ -102,12 +102,14 @@ func (a *Six910API) GetCustomerID(id int64, headers *Headers) *sdbi.Customer {
 }
 
 //GetCustomerList GetCustomerList
-func (a *Six910API) GetCustomerList(headers *Headers) *[]sdbi.Customer {
+func (a *Six910API) GetCustomerList(start int64, end int64, headers *Headers) *[]sdbi.Customer {
 	var rtn []sdbi.Customer
 	var sid = a.getStoreID(headers)
 	sidStrGcusl := strconv.FormatInt(sid, 10)
+	stStrGcusl := strconv.FormatInt(start, 10)
+	endStrGcusl := strconv.FormatInt(end, 10)
 
-	var url = a.restURL + "/rs/customer/get/list/" + sidStrGcusl
+	var url = a.restURL + "/rs/customer/get/list/" + sidStrGcusl + "/" + stStrGcusl + "/" + endStrGcusl
 	a.log.Debug("url: ", url)
 
 	req := a.buildRequest(get, url, headers, nil)

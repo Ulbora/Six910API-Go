@@ -255,7 +255,7 @@ func TestSix910API_GetCustomerList(t *testing.T) {
 	var head Headers
 	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
 
-	res := api.GetCustomerList(&head)
+	res := api.GetCustomerList(0, 100, &head)
 	fmt.Println("customer list in get: ", *res)
 
 	if (*res)[0].ID == 0 {
