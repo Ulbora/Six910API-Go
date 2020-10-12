@@ -221,6 +221,13 @@ type API interface {
 	GetProductList(start int64, end int64, headers *Headers) *[]sdbi.Product
 	DeleteProduct(id int64, headers *Headers) *Response
 
+	GetProductManufacturerListByProductName(name string, headers *Headers) *[]string
+	GetProductByNameAndManufacturerName(manf string, name string,
+		start int64, end int64, headers *Headers) *[]sdbi.Product
+	GetProductManufacturerListByCatID(catID int64, headers *Headers) *[]string
+	GetProductByCatAndManufacturer(catID int64, manf string,
+		start int64, end int64, headers *Headers) *[]sdbi.Product
+
 	//product category
 	AddProductCategory(pc *sdbi.ProductCategory, headers *Headers) *Response
 	GetProductCategoryList(productID int64, headers *Headers) []int64
