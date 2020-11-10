@@ -213,6 +213,7 @@ type API interface {
 	//products
 	AddProduct(p *sdbi.Product, headers *Headers) *ResponseID
 	UpdateProduct(p *sdbi.Product, headers *Headers) *Response
+	UpdateProductQuantity(p *sdbi.Product, headers *Headers) *Response
 	GetProductByID(id int64, headers *Headers) *sdbi.Product
 	GetProductBySku(sku string, did int64, headers *Headers) *sdbi.Product
 	GetProductsByPromoted(start int64, end int64, headers *Headers) *[]sdbi.Product

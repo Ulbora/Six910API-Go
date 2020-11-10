@@ -68,6 +68,26 @@ func (a *Six910API) UpdateProduct(p *sdbi.Product, headers *Headers) *Response {
 	return &rtn
 }
 
+//UpdateProductQuantity UpdateProductQuantity
+func (a *Six910API) UpdateProductQuantity(p *sdbi.Product, headers *Headers) *Response {
+	var rtn Response
+	p.StoreID = a.getStoreID(headers)
+	var url = a.restURL + "/rs/product/update/quantity"
+	a.log.Debug("url: ", url)
+	aJSON, err := json.Marshal(p)
+	if err == nil {
+		reqpduq := a.buildRequest(put, url, headers, aJSON)
+		pduqsuc, stat := a.proxy.Do(reqpduq, &rtn)
+		a.log.Debug("suc: ", pduqsuc)
+		a.log.Debug("stat: ", stat)
+		if !pduqsuc {
+			rtn.Code = int64(stat)
+		}
+	}
+	a.log.Debug("rtn: ", rtn)
+	return &rtn
+}
+
 //GetProductByID GetProductByID
 func (a *Six910API) GetProductByID(id int64, headers *Headers) *sdbi.Product {
 	var rtn sdbi.Product
