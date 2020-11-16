@@ -179,6 +179,8 @@ type API interface {
 	GetOrderList(cid int64, headers *Headers) *[]sdbi.Order
 	GetStoreOrderList(headers *Headers) *[]sdbi.Order
 	GetStoreOrderListByStatus(status string, headers *Headers) *[]sdbi.Order
+	GetOrderCountData(headers *Headers) *[]sdbi.OrderCountData
+	GetOrderSalesData(headers *Headers) *[]sdbi.OrderSalesData
 	DeleteOrder(id int64, headers *Headers) *Response
 
 	//order comments
@@ -220,6 +222,8 @@ type API interface {
 	GetProductsByName(name string, start int64, end int64, headers *Headers) *[]sdbi.Product
 	GetProductsByCaterory(catID int64, start int64, end int64, headers *Headers) *[]sdbi.Product
 	GetProductList(start int64, end int64, headers *Headers) *[]sdbi.Product
+	GetProductIDList(headers *Headers) *[]int64
+	GetProductIDListByCategories(idReq *ProdIDReq, headers *Headers) *[]int64
 	DeleteProduct(id int64, headers *Headers) *Response
 
 	GetProductManufacturerListByProductName(name string, headers *Headers) *[]string
@@ -309,4 +313,8 @@ type API interface {
 	GetZoneZipListByExclusion(exID int64, headers *Headers) *[]sdbi.ZoneZip
 	GetZoneZipListByInclusion(incID int64, headers *Headers) *[]sdbi.ZoneZip
 	DeleteZoneZip(id int64, incID int64, exID int64, headers *Headers) *Response
+
+	//visitor
+	AddVisit(v *sdbi.Visitor, headers *Headers) *Response
+	GetVisitorData(headers *Headers) *[]sdbi.VisitorData
 }

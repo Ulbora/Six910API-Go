@@ -28,6 +28,12 @@ import (
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+//ProdIDReq ProdIDReq
+type ProdIDReq struct {
+	StoreID      int64    `json:"storeId"`
+	CategoryList *[]int64 `json:"categoryList"`
+}
+
 //AddProduct AddProduct
 func (a *Six910API) AddProduct(p *sdbi.Product, headers *Headers) *ResponseID {
 	var rtn ResponseID
@@ -196,6 +202,42 @@ func (a *Six910API) GetProductList(start int64, end int64, headers *Headers) *[]
 	a.log.Debug("suc: ", pdlsuc)
 	a.log.Debug("stat: ", stat)
 
+	return &rtn
+}
+
+//GetProductIDList GetProductIDList
+func (a *Six910API) GetProductIDList(headers *Headers) *[]int64 {
+	var rtn []int64
+	var sid = a.getStoreID(headers)
+	//stStrgpdl := strconv.FormatInt(start, 10)
+	//endStrgpdl := strconv.FormatInt(end, 10)
+	sidStrGidl := strconv.FormatInt(sid, 10)
+
+	var url = a.restURL + "/rs/product/get/ids/" + sidStrGidl
+	a.log.Debug("url: ", url)
+
+	req := a.buildRequest(get, url, headers, nil)
+	pdlsuc, stat := a.proxy.Do(req, &rtn)
+	a.log.Debug("suc: ", pdlsuc)
+	a.log.Debug("stat: ", stat)
+
+	return &rtn
+}
+
+//GetProductIDListByCategories GetProductIDListByCategories
+func (a *Six910API) GetProductIDListByCategories(idReq *ProdIDReq, headers *Headers) *[]int64 {
+	var rtn []int64
+	idReq.StoreID = a.getStoreID(headers)
+	var url = a.restURL + "/rs/product/get/ids/cat"
+	a.log.Debug("url: ", url)
+	aJSON, err := json.Marshal(idReq)
+	if err == nil {
+		reqct := a.buildRequest(post, url, headers, aJSON)
+		sucpdid, stat := a.proxy.Do(reqct, &rtn)
+		a.log.Debug("suc: ", sucpdid)
+		a.log.Debug("stat: ", stat)
+	}
+	a.log.Debug("rtn: ", rtn)
 	return &rtn
 }
 

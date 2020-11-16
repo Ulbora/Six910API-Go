@@ -318,6 +318,72 @@ func TestSix910API_GetStoreOrderListByStatus(t *testing.T) {
 	}
 }
 
+func TestSix910API_GetOrderCountData(t *testing.T) {
+	var sapi Six910API
+	//sapi.SetAPIKey("123")
+	sapi.storeID = 59
+
+	sapi.SetRestURL("http://localhost:3002")
+	sapi.SetStore("defaultLocalStore", "defaultLocalStore.mydomain.com")
+	sapi.SetAPIKey("GDG651GFD66FD16151sss651f651ff65555ddfhjklyy5")
+
+	api := sapi.GetNew()
+	sapi.SetLogLever(lg.AllLevel)
+
+	//---mock out the call
+	var gp px.MockGoProxy
+	var mres http.Response
+	mres.Body = ioutil.NopCloser(bytes.NewBufferString(`[{"orderCount":5}]`))
+	gp.MockResp = &mres
+	gp.MockDoSuccess1 = true
+	gp.MockRespCode = 200
+	sapi.OverrideProxy(&gp)
+	//---end mock out the call
+
+	var head Headers
+	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
+
+	res := api.GetOrderCountData(&head)
+	fmt.Println("GetOrderCountData in get: ", *res)
+
+	if (*res)[0].OrderCount != 5 {
+		t.Fail()
+	}
+}
+
+func TestSix910API_GetOrderSalesData(t *testing.T) {
+	var sapi Six910API
+	//sapi.SetAPIKey("123")
+	sapi.storeID = 59
+
+	sapi.SetRestURL("http://localhost:3002")
+	sapi.SetStore("defaultLocalStore", "defaultLocalStore.mydomain.com")
+	sapi.SetAPIKey("GDG651GFD66FD16151sss651f651ff65555ddfhjklyy5")
+
+	api := sapi.GetNew()
+	sapi.SetLogLever(lg.AllLevel)
+
+	//---mock out the call
+	var gp px.MockGoProxy
+	var mres http.Response
+	mres.Body = ioutil.NopCloser(bytes.NewBufferString(`[{"orderTotal":5}]`))
+	gp.MockResp = &mres
+	gp.MockDoSuccess1 = true
+	gp.MockRespCode = 200
+	sapi.OverrideProxy(&gp)
+	//---end mock out the call
+
+	var head Headers
+	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
+
+	res := api.GetOrderSalesData(&head)
+	fmt.Println("GetOrderSalesData in get: ", *res)
+
+	if (*res)[0].OrderTotal != 5 {
+		t.Fail()
+	}
+}
+
 func TestSix910API_DeleteOrder(t *testing.T) {
 	var sapi Six910API
 	//sapi.SetAPIKey("123")

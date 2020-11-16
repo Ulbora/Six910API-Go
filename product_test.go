@@ -411,6 +411,77 @@ func TestSix910API_GetProductList(t *testing.T) {
 	}
 }
 
+func TestSix910API_GetProductIdList(t *testing.T) {
+	var sapi Six910API
+	//sapi.SetAPIKey("123")
+	sapi.storeID = 59
+
+	sapi.SetRestURL("http://localhost:3002")
+	sapi.SetStore("defaultLocalStore", "defaultLocalStore.mydomain.com")
+	sapi.SetAPIKey("GDG651GFD66FD16151sss651f651ff65555ddfhjklyy5")
+
+	api := sapi.GetNew()
+	sapi.SetLogLever(lg.AllLevel)
+
+	//---mock out the call
+	var gp px.MockGoProxy
+	var mres http.Response
+	mres.Body = ioutil.NopCloser(bytes.NewBufferString(`[123, 123]`))
+	gp.MockResp = &mres
+	gp.MockDoSuccess1 = true
+	gp.MockRespCode = 200
+	sapi.OverrideProxy(&gp)
+	//---end mock out the call
+
+	var head Headers
+	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
+
+	res := api.GetProductIDList(&head)
+	fmt.Println("GetProductIdList in get: ", *res)
+
+	if len(*res) != 2 {
+		t.Fail()
+	}
+}
+
+func TestSix910API_GetProductIDListByCategories(t *testing.T) {
+	var sapi Six910API
+	//sapi.SetAPIKey("123")
+	sapi.storeID = 59
+
+	sapi.SetRestURL("http://localhost:3002")
+	sapi.SetStore("defaultLocalStore", "defaultLocalStore.mydomain.com")
+	sapi.SetAPIKey("GDG651GFD66FD16151sss651f651ff65555ddfhjklyy5")
+
+	api := sapi.GetNew()
+	sapi.SetLogLever(lg.AllLevel)
+
+	//---mock out the call
+	var gp px.MockGoProxy
+	var mres http.Response
+	mres.Body = ioutil.NopCloser(bytes.NewBufferString(`[123, 123]`))
+	gp.MockResp = &mres
+	gp.MockDoSuccess1 = true
+	gp.MockRespCode = 200
+	sapi.OverrideProxy(&gp)
+	//---end mock out the call
+
+	var crt ProdIDReq
+	crt.CategoryList = &[]int64{170, 171}
+
+	var head Headers
+	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
+	//head.Set("localDomain", "defaultLocalStore.mydomain.com")
+
+	res := api.GetProductIDListByCategories(&crt, &head)
+
+	fmt.Println("get id by cat: ", res)
+
+	if len(*res) != 2 {
+		t.Fail()
+	}
+}
+
 func TestSix910API_DeleteProduct(t *testing.T) {
 	var sapi Six910API
 	//sapi.SetAPIKey("123")
