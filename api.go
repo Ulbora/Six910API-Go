@@ -303,7 +303,9 @@ type API interface {
 
 	//user
 	AddCustomerUser(u *User, headers *Headers) *Response
+	AddAdminUser(u *User, headers *Headers) *Response
 	UpdateUser(u *User, headers *Headers) *Response
+	AdminUpdateUser(u *User, headers *Headers) *Response
 	GetUser(u *User, headers *Headers) *UserResponse
 	GetAdminUsers(headers *Headers) *[]UserResponse
 	GetCustomerUsers(headers *Headers) *[]UserResponse
