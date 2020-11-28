@@ -309,6 +309,7 @@ type API interface {
 	GetUser(u *User, headers *Headers) *UserResponse
 	GetAdminUsers(headers *Headers) *[]UserResponse
 	GetCustomerUsers(headers *Headers) *[]UserResponse
+	GetUsersByCustomer(cid int64, headers *Headers) *[]UserResponse
 
 	//zip code zone
 	AddZoneZip(z *sdbi.ZoneZip, headers *Headers) *ResponseID

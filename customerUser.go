@@ -116,3 +116,21 @@ func (a *Six910API) GetCustomerUsers(headers *Headers) *[]UserResponse {
 
 	return &rtn
 }
+
+//GetUsersByCustomer GetUsersByCustomer
+func (a *Six910API) GetUsersByCustomer(cid int64, headers *Headers) *[]UserResponse {
+	var rtn []UserResponse
+	cidgcustr := strconv.FormatInt(cid, 10)
+	var sid = a.getStoreID(headers)
+	sidStrGculstr := strconv.FormatInt(sid, 10)
+
+	var url = a.restURL + "/rs/get/customer/users/" + cidgcustr + "/" + sidStrGculstr
+	a.log.Debug("url: ", url)
+
+	req := a.buildRequest(get, url, headers, nil)
+	gcculsuc, stat := a.proxy.Do(req, &rtn)
+	a.log.Debug("suc: ", gcculsuc)
+	a.log.Debug("stat: ", stat)
+
+	return &rtn
+}
