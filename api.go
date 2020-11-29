@@ -75,6 +75,14 @@ type Headers struct {
 	mu      sync.Mutex
 }
 
+//CustomerPasswordResponse CustomerPasswordResponse
+type CustomerPasswordResponse struct {
+	Success  bool   `json:"success"`
+	Username string `json:"username"`
+	Password string `json:"password"`
+	Code     int64  `json:"code"`
+}
+
 //Set Set
 func (h *Headers) Set(key string, value string) {
 	h.mu.Lock()
@@ -310,6 +318,7 @@ type API interface {
 	GetAdminUsers(headers *Headers) *[]UserResponse
 	GetCustomerUsers(headers *Headers) *[]UserResponse
 	GetUsersByCustomer(cid int64, headers *Headers) *[]UserResponse
+	ResetCustomerUserPassword(u *User, headers *Headers) *CustomerPasswordResponse
 
 	//zip code zone
 	AddZoneZip(z *sdbi.ZoneZip, headers *Headers) *ResponseID

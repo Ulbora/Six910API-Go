@@ -134,3 +134,23 @@ func (a *Six910API) GetUsersByCustomer(cid int64, headers *Headers) *[]UserRespo
 
 	return &rtn
 }
+
+//ResetCustomerUserPassword ResetCustomerUserPassword
+func (a *Six910API) ResetCustomerUserPassword(u *User, headers *Headers) *CustomerPasswordResponse {
+	var rtn CustomerPasswordResponse
+	u.StoreID = a.getStoreID(headers)
+	var url = a.restURL + "/rs/customer/user/reset/pw"
+	a.log.Debug("url: ", url)
+	aJSON, err := json.Marshal(u)
+	if err == nil {
+		reqcpwu := a.buildRequest(put, url, headers, aJSON)
+		cpwusuc, stat := a.proxy.Do(reqcpwu, &rtn)
+		a.log.Debug("suc: ", cpwusuc)
+		a.log.Debug("stat: ", stat)
+		if !cpwusuc {
+			rtn.Code = int64(stat)
+		}
+	}
+	a.log.Debug("rtn: ", rtn)
+	return &rtn
+}

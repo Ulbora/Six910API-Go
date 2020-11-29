@@ -321,3 +321,99 @@ func TestSix910API_GetUsersByCustomer(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestSix910API_ResetCustomerUserPassword(t *testing.T) {
+	var sapi Six910API
+	//sapi.SetAPIKey("123")
+	sapi.storeID = 59
+
+	sapi.SetRestURL("http://localhost:3002")
+	sapi.SetStore("defaultLocalStore", "defaultLocalStore.mydomain.com")
+	sapi.SetAPIKey("GDG651GFD66FD16151sss651f651ff65555ddfhjklyy5")
+
+	api := sapi.GetNew()
+	sapi.SetLogLever(lg.AllLevel)
+
+	//---mock out the call
+	var gp px.MockGoProxy
+	var mres http.Response
+	mres.Body = ioutil.NopCloser(bytes.NewBufferString(`{"success":true, "username":"tester6@tester.com", "password": "5555hhh"}`))
+	gp.MockResp = &mres
+	gp.MockDoSuccess1 = true
+	gp.MockRespCode = 200
+	sapi.OverrideProxy(&gp)
+	//---end mock out the call
+
+	// var crt sdbi.Category
+	// crt.Description = "test"
+	// crt.Name = "stuff"
+
+	var u User
+	u.CustomerID = 18
+	u.Enabled = true
+	u.Password = "tester"
+	u.Role = "customer"
+	u.StoreID = 59
+	u.Username = "tester6@tester.com"
+
+	var head Headers
+	//head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
+	head.Set("apiKey", "GDG651GFD66FD16151sss651f651ff65555ddfhjklyy5")
+	//head.Set("localDomain", "defaultLocalStore.mydomain.com")
+
+	res := api.ResetCustomerUserPassword(&u, &head)
+
+	fmt.Println("ResetCustomerUserPassword: ", res)
+
+	if !res.Success {
+		t.Fail()
+	}
+}
+
+func TestSix910API_ResetCustomerUserPasswordFail(t *testing.T) {
+	var sapi Six910API
+	//sapi.SetAPIKey("123")
+	sapi.storeID = 59
+
+	sapi.SetRestURL("http://localhost:3002")
+	sapi.SetStore("defaultLocalStore", "defaultLocalStore.mydomain.com")
+	sapi.SetAPIKey("GDG651GFD66FD16151sss651f651ff65555ddfhjklyy5")
+
+	api := sapi.GetNew()
+	sapi.SetLogLever(lg.AllLevel)
+
+	//---mock out the call
+	var gp px.MockGoProxy
+	var mres http.Response
+	mres.Body = ioutil.NopCloser(bytes.NewBufferString(`{"success":false, "username":"tester6@tester.com", "password": "5555hhh"}`))
+	gp.MockResp = &mres
+	//gp.MockDoSuccess1 = true
+	gp.MockRespCode = 200
+	sapi.OverrideProxy(&gp)
+	//---end mock out the call
+
+	// var crt sdbi.Category
+	// crt.Description = "test"
+	// crt.Name = "stuff"
+
+	var u User
+	u.CustomerID = 18
+	u.Enabled = true
+	u.Password = "tester"
+	u.Role = "customer"
+	u.StoreID = 59
+	u.Username = "tester6@tester.com"
+
+	var head Headers
+	//head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
+	head.Set("apiKey", "GDG651GFD66FD16151sss651f651ff65555ddfhjklyy5")
+	//head.Set("localDomain", "defaultLocalStore.mydomain.com")
+
+	res := api.ResetCustomerUserPassword(&u, &head)
+
+	fmt.Println("ResetCustomerUserPassword: ", res)
+
+	if res.Success {
+		t.Fail()
+	}
+}
