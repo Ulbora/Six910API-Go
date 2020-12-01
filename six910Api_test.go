@@ -58,3 +58,9 @@ func TestSix910API_SetStoreID(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestSix910API_SetLogger(t *testing.T) {
+	var l lg.Logger
+	var sapi Six910API
+	sapi.SetLogger(&l)
+}

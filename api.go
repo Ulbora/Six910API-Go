@@ -3,6 +3,7 @@ package six910api
 import (
 	"sync"
 
+	lg "github.com/Ulbora/Level_Logger"
 	sdbi "github.com/Ulbora/six910-database-interface"
 )
 
@@ -329,4 +330,6 @@ type API interface {
 	//visitor
 	AddVisit(v *sdbi.Visitor, headers *Headers) *Response
 	GetVisitorData(headers *Headers) *[]sdbi.VisitorData
+
+	SetLogger(l *lg.Logger)
 }

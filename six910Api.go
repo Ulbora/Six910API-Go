@@ -53,6 +53,11 @@ func (a *Six910API) GetNew() API {
 	return a
 }
 
+//SetLogger SetLogger
+func (a *Six910API) SetLogger(l *lg.Logger) {
+	a.log = l
+}
+
 func (a *Six910API) buildRequest(method string, url string, headers *Headers, aJSON []byte) *http.Request {
 	headers.Set("storeName", a.storeName)
 	headers.Set("localDomain", a.localDomain)
