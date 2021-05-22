@@ -211,6 +211,7 @@ type API interface {
 	AddPaymentGateway(pgw *sdbi.PaymentGateway, headers *Headers) *ResponseID
 	UpdatePaymentGateway(pgw *sdbi.PaymentGateway, headers *Headers) *Response
 	GetPaymentGateway(id int64, headers *Headers) *sdbi.PaymentGateway
+	GetPaymentGatewayByName(name string, headers *Headers) *sdbi.PaymentGateway
 	GetPaymentGateways(headers *Headers) *[]sdbi.PaymentGateway
 	DeletePaymentGateway(id int64, headers *Headers) *Response
 

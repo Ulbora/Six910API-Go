@@ -95,6 +95,22 @@ func (a *Six910API) GetPaymentGateway(id int64, headers *Headers) *sdbi.PaymentG
 	return &rtn
 }
 
+//GetPaymentGatewayByName GetPaymentGatewayByName
+func (a *Six910API) GetPaymentGatewayByName(name string, headers *Headers) *sdbi.PaymentGateway {
+	var rtn sdbi.PaymentGateway
+	var ctsn = a.getStoreID(headers)
+	sidStrgpgn := strconv.FormatInt(ctsn, 10)
+	var url = a.restURL + "/rs/paymentGateway/get/name/" + name + "/" + sidStrgpgn
+	a.log.Debug("url: ", url)
+
+	req := a.buildRequest(get, url, headers, nil)
+	pggnsuc, stat := a.proxy.Do(req, &rtn)
+	a.log.Debug("suc gbn: ", pggnsuc)
+	a.log.Debug("stat: ", stat)
+
+	return &rtn
+}
+
 //GetPaymentGateways GetPaymentGateways
 func (a *Six910API) GetPaymentGateways(headers *Headers) *[]sdbi.PaymentGateway {
 	var rtn []sdbi.PaymentGateway
