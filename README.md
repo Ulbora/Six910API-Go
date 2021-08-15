@@ -2,7 +2,7 @@
 
 # Six910API-Go
 
-[![Build Status](https://travis-ci.org/Ulbora/Six910API-Go.svg?branch=master)](https://travis-ci.org/Ulbora/Six910API-Go)
+[![Build Status](https://travis-ci.com/Ulbora/Six910API-Go.svg?branch=master)](https://travis-ci.com/Ulbora/Six910API-Go)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Six910API-Go&metric=alert_status)](https://sonarcloud.io/dashboard?id=Six910API-Go)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Ulbora/Six910API-Go)](https://goreportcard.com/report/github.com/Ulbora/Six910API-Go)
 

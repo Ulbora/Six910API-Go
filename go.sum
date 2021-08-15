@@ -30,3 +30,5 @@ github.com/Ulbora/six910-database-interface v1.0.37 h1:QmLF7xsqU8DVos97zA8tE8UHo
 github.com/Ulbora/six910-database-interface v1.0.37/go.mod h1:OGqZQ5ETgqxsHB636qmivSR36NzQxhV4T+ATsIUJSLM=
 github.com/Ulbora/six910-database-interface v1.1.0 h1:JjJKWsEfDu/Heq6wYnKYg0LZTqUUaNvzsZvYdHkm2bI=
 github.com/Ulbora/six910-database-interface v1.1.0/go.mod h1:xKoESfGA7CV8kFeZwMtwnBAezrBFzTdtrSRaeUn0QBQ=
+github.com/Ulbora/six910-database-interface v1.1.1 h1:LSCAw1d+SJnahx/aAltl+VDxUlmR15yaH5++GDxtsMk=
+github.com/Ulbora/six910-database-interface v1.1.1/go.mod h1:xKoESfGA7CV8kFeZwMtwnBAezrBFzTdtrSRaeUn0QBQ=
