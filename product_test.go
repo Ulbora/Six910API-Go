@@ -261,7 +261,52 @@ func TestSix910API_GetProductByID(t *testing.T) {
 	//---mock out the call
 	var gp px.MockGoProxy
 	var mres http.Response
-	mres.Body = ioutil.NopCloser(bytes.NewBufferString(`{"id":1}`))
+	mres.Body = ioutil.NopCloser(bytes.NewBufferString(`{"id":1, "subSkuList": [
+        {
+            "id": 26104,
+            "sku": "7778524widget",
+            "gtin": "456789555",
+            "name": "Big widget",
+            "shortDesc": "this is a big widget",
+            "desc": "A big widget",
+            "cost": 10.95,
+            "msrp": 30.95,
+            "map": 20.95,
+            "price": 28.95,
+            "salePrice": 0,
+            "currency": "USD",
+            "manufacturerId": "",
+            "manufacturer": "Widgets USA",
+            "stock": 10,
+            "stockAlert": 2,
+            "weight": 0,
+            "width": 0,
+            "height": 0,
+            "depth": 0,
+            "shippingMarkup": 0,
+            "visible": true,
+            "searchable": true,
+            "multibox": false,
+            "shipSeparately": false,
+            "freeShipping": true,
+            "promoted": true,
+            "dropship": false,
+            "specialProcessing": false,
+            "specialProcessingType": "",
+            "size": "",
+            "color": "",
+            "thumbnail": "/thumbnail/wdg.png",
+            "image1": "image/wdg.png",
+            "image2": "",
+            "image3": "",
+            "image4": "",
+            "distributorId": 443,
+            "storeId": 59,
+            "parentProductId": 26103,
+            "entered": "2022-04-18T20:19:42Z",
+            "updated": "0001-01-01T00:00:00Z",
+            "subSkuList": null
+        }]}`))
 	gp.MockResp = &mres
 	gp.MockDoSuccess1 = true
 	gp.MockRespCode = 200
@@ -274,7 +319,7 @@ func TestSix910API_GetProductByID(t *testing.T) {
 	res := api.GetProductByID(8, &head)
 	fmt.Println("GetProductByID in get: ", *res)
 
-	if res.ID == 0 {
+	if res.ID == 0 || len(*res.SubSkuList) < 1 {
 		t.Fail()
 	}
 }
