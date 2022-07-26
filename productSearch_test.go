@@ -6,10 +6,11 @@ import (
 	"io/ioutil"
 	"net/http"
 
+	"testing"
+
 	px "github.com/Ulbora/GoProxy"
 	lg "github.com/Ulbora/Level_Logger"
-	"testing"
-	//sdbi "github.com/Ulbora/six910-database-interface"
+	sdbi "github.com/Ulbora/six910-database-interface"
 )
 
 func TestSix910API_GetProductManufacturerListByProductName(t *testing.T) {
@@ -139,6 +140,45 @@ func TestSix910API_GetProductByCatAndManufacturer(t *testing.T) {
 
 	res := api.GetProductByCatAndManufacturer(200, "Blackhawk", 0, 100, &head)
 	fmt.Println("GetProductsByName in get: ", *res)
+
+	if (*res)[0].ID == 0 {
+		t.Fail()
+	}
+
+}
+
+func TestSix910API_ProductSearch(t *testing.T) {
+	var sapi Six910API
+	//sapi.SetAPIKey("123")
+	sapi.storeID = 59
+
+	sapi.SetRestURL("http://localhost:3002")
+	sapi.SetStore("defaultLocalStore", "defaultLocalStore.mydomain.com")
+	sapi.SetAPIKey("GDG651GFD66FD16151sss651f651ff65555ddfhjklyy5")
+
+	api := sapi.GetNew()
+	sapi.SetLogLever(lg.AllLevel)
+
+	//---mock out the call
+	var gp px.MockGoProxy
+	var mres http.Response
+	mres.Body = ioutil.NopCloser(bytes.NewBufferString(`[{"id":1}]`))
+	gp.MockResp = &mres
+	gp.MockDoSuccess1 = true
+	gp.MockRespCode = 200
+	sapi.OverrideProxy(&gp)
+	//---end mock out the call
+
+	var head Headers
+	head.Set("Authorization", "Basic YWRtaW46YWRtaW4=")
+
+	var patts = []string{"ammo"}
+	var sp sdbi.ProductSearch
+	sp.DescAttributes = &patts
+	sp.End = 100
+
+	res := api.ProductSearch(&sp, &head)
+	fmt.Println("Search Product: ", *res)
 
 	if (*res)[0].ID == 0 {
 		t.Fail()

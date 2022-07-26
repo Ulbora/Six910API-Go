@@ -1,8 +1,10 @@
 package six910api
 
 import (
-	sdbi "github.com/Ulbora/six910-database-interface"
+	"encoding/json"
 	"strconv"
+
+	sdbi "github.com/Ulbora/six910-database-interface"
 )
 
 /*
@@ -98,4 +100,20 @@ func (a *Six910API) GetProductByCatAndManufacturer(catID int64, manf string,
 	a.log.Debug("stat: ", stat)
 
 	return &rtn
+}
+
+//ProductSearch ProductSearch
+func (a *Six910API) ProductSearch(p *sdbi.ProductSearch, headers *Headers) *[]sdbi.Product {
+	p.StoreID = a.getStoreID(headers)
+	var prrtn []sdbi.Product
+	var url = a.restURL + "/rs/product/search"
+	a.log.Debug("url: ", url)
+	aJSON, err := json.Marshal(p)
+	if err == nil {
+		reqpsr := a.buildRequest(post, url, headers, aJSON)
+		sucpsr, stat := a.proxy.Do(reqpsr, &prrtn)
+		a.log.Debug("suc: ", sucpsr)
+		a.log.Debug("stat: ", stat)
+	}
+	return &prrtn
 }

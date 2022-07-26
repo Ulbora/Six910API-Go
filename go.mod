@@ -5,5 +5,5 @@ go 1.18
 require (
 	github.com/Ulbora/GoProxy v1.0.1
 	github.com/Ulbora/Level_Logger v1.0.2
-	github.com/Ulbora/six910-database-interface v1.1.10
+	github.com/Ulbora/six910-database-interface v1.2.2
 )

@@ -242,6 +242,7 @@ type API interface {
 	GetProductManufacturerListByCatID(catID int64, headers *Headers) *[]string
 	GetProductByCatAndManufacturer(catID int64, manf string,
 		start int64, end int64, headers *Headers) *[]sdbi.Product
+	ProductSearch(p *sdbi.ProductSearch, headers *Headers) *[]sdbi.Product
 
 	//product category
 	AddProductCategory(pc *sdbi.ProductCategory, headers *Headers) *Response
