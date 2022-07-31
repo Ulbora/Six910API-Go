@@ -237,6 +237,7 @@ type API interface {
 	DeleteProduct(id int64, headers *Headers) *Response
 
 	GetProductManufacturerListByProductName(name string, headers *Headers) *[]string
+	GetProductManufacturerListByProductSearch(search string, headers *Headers) *[]string
 	GetProductByNameAndManufacturerName(manf string, name string,
 		start int64, end int64, headers *Headers) *[]sdbi.Product
 	GetProductManufacturerListByCatID(catID int64, headers *Headers) *[]string

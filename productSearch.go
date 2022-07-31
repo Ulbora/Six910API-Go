@@ -44,6 +44,22 @@ func (a *Six910API) GetProductManufacturerListByProductName(name string, headers
 	return &rtn
 }
 
+//GetProductManufacturerListByProductSearch GetProductManufacturerListByProductSearch
+func (a *Six910API) GetProductManufacturerListByProductSearch(search string, headers *Headers) *[]string {
+	var rtn []string
+	var sid = a.getStoreID(headers)
+	sidDesStrGml := strconv.FormatInt(sid, 10)
+
+	var url = a.restURL + "/rs/manufacturer/get/product/desc/" + search + "/" + sidDesStrGml
+	a.log.Debug("url: ", url)
+
+	req := a.buildRequest(get, url, headers, nil)
+	dmlsuc, stat := a.proxy.Do(req, &rtn)
+	a.log.Debug("suc: ", dmlsuc)
+	a.log.Debug("stat: ", stat)
+	return &rtn
+}
+
 //GetProductByNameAndManufacturerName GetProductByNameAndManufacturerName
 func (a *Six910API) GetProductByNameAndManufacturerName(manf string, name string,
 	start int64, end int64, headers *Headers) *[]sdbi.Product {
