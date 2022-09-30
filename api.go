@@ -94,6 +94,17 @@ func (h *Headers) Set(key string, value string) {
 	h.headers[key] = value
 }
 
+//DeepCopy DeepCopy --for use inside go routines to avoid race conditions--
+func (h *Headers) DeepCopy() *Headers {
+	var rtn Headers
+	for k, v := range h.headers {
+		rtn.Set(k, v)
+	}
+	return &rtn
+}
+
+// GetValuesFromMap -- return copy of map
+
 // go mod init github.com/Ulbora/Six910API-Go
 
 //API API
